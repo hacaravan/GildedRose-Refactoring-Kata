@@ -1,9 +1,16 @@
 "use strict"
 
 const {createAndUpdateItem} = require("./spec_helper.js")
+const {Shop, Item} = require("../src/gilded_rose");
 
 describe("Gilded Rose", function() {
   describe("updateQuality()", () => {
+    describe("when passed nothing", () => {
+      it("returns an empty array", () => {
+        let emptyShop = new Shop()
+        expect(emptyShop.updateQuality()).toStrictEqual([])
+      })
+    })
     it("returns items you've added to a shop", function() {
       let updatedItem = createAndUpdateItem("item", 10, 10)
       expect(updatedItem.name).toBe("item");
