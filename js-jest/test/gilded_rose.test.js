@@ -1,21 +1,19 @@
 "use strict"
 
 const {Shop, Item} = require("../src/gilded_rose");
-const {updateItem} = require("./spec_helper.js")
+const {createAndUpdateItem} = require("./spec_helper.js")
 
 describe("Gilded Rose", function() {
   describe("updateQuality()", () => {
     it("returns items you've added to a shop", function() {
-      let item = new Item("item", 10, 10)
-      let updatedItem = updateItem(item)
+      let updatedItem = createAndUpdateItem("item", 10, 10)
       expect(updatedItem.name).toBe("item");
     });
     describe("for a normal item", () => {
       describe("before the sell by date", () => {
-        let normalItem, updatedNormalItem;
+        let updatedNormalItem;
         beforeEach(() => {
-          normalItem = new Item("normal item", 10, 20)
-          updatedNormalItem = updateItem(normalItem)
+          updatedNormalItem = createAndUpdateItem("normal item", 10, 20)
         })
         it("decrements the sell in date by 1", () => {
           expect(updatedNormalItem.sellIn).toBe(9)
@@ -25,10 +23,9 @@ describe("Gilded Rose", function() {
         })
       })
       describe("after the sell in date", () => {
-        let normalOutdatedItem, updatedNormalOutdatedItem;
+        let updatedNormalOutdatedItem;
         beforeEach(() => {
-          normalOutdatedItem = new Item("normal item", -1, 20)
-          updatedNormalOutdatedItem = updateItem(normalOutdatedItem)
+          updatedNormalOutdatedItem = createAndUpdateItem("normal item", -1, 20)
         })
         it("decrements quality by 2", () => {
           expect(updatedNormalOutdatedItem.quality).toBe(18)
@@ -40,15 +37,13 @@ describe("Gilded Rose", function() {
       describe("with low quality", () => {
         describe("before the sell by date", () => {
           it("does not reduce quality below 0", () => {
-            let lowQualityItem = new Item("low quality item", 10, 0)
-            let updatedLowQualityItem = updateItem(lowQualityItem)
+            let updatedLowQualityItem = createAndUpdateItem("low quality item", 10, 0)
             expect(updatedLowQualityItem.quality).toBe(0)
           })
         })
         describe("after the sell by date", () => {
           it("does not reduce quality below 0", () => {
-            let lowQualityItem = new Item("low quality item", -1, 0)
-            let updatedLowQualityItem = updateItem(lowQualityItem)
+            let updatedLowQualityItem = createAndUpdateItem("low quality item", -1, 0)
             expect(updatedLowQualityItem.quality).toBe(0)
           })
         })
@@ -57,10 +52,9 @@ describe("Gilded Rose", function() {
 
     describe("for aged brie", () => {
       describe("before the sell in date", () => {
-        let brie, updatedBrie;
+        let updatedBrie;
         beforeEach( () => {
-          brie = new Item("Aged Brie", 10, 10)
-          updatedBrie = updateItem(brie)
+          updatedBrie = createAndUpdateItem("Aged Brie", 10, 10)
         })
         it("increases quality by 1", () => {
           expect(updatedBrie.quality).toBe(11)
@@ -70,10 +64,9 @@ describe("Gilded Rose", function() {
         })
       })
       describe("after the sell in date", () => {
-        let oldBrie, updatedOldBrie;
+        let updatedOldBrie;
         beforeEach( () => {
-          oldBrie = new Item("Aged Brie", -1, 10)
-          updatedOldBrie = updateItem(oldBrie)
+          updatedOldBrie = createAndUpdateItem("Aged Brie", -1, 10)
         })
         it("increases quality by 2", () => {
           expect(updatedOldBrie.quality).toBe(12)
@@ -85,15 +78,13 @@ describe("Gilded Rose", function() {
       describe("with high quality", () => {
         describe("before the sell in date", () => {
           it("does not increase quality above 50", () => {
-            let premiumBrie = new Item("Aged Brie", 10, 50)
-            let updatedPremiumBrie = updateItem(premiumBrie)
+            let updatedPremiumBrie = createAndUpdateItem("Aged Brie", 10, 50)
             expect(updatedPremiumBrie.quality).toBe(50)
           })
         })
         describe("after the sell in date", () => {
           it("does not increase quality above 50", () => {
-            let premiumOldBrie = new Item("Aged Brie", -1, 50)
-            let updatedPremiumOldBrie = updateItem(premiumOldBrie)
+            let updatedPremiumOldBrie = createAndUpdateItem("Aged Brie", -1, 50)
             expect(updatedPremiumOldBrie.quality).toBe(50)
           })
         })
