@@ -16,6 +16,11 @@ describe("Gilded Rose", function() {
       it("decrements the sell in date by 1", () => {
         expect(updatedNormalItem.sellIn).toBe(9)
       })
+      describe("before the sell in date", () => {
+        it("decrements the quality by 1", () => {
+          expect(updatedNormalItem.quality).toBe(19)
+        })
+      })
     })
   })
 

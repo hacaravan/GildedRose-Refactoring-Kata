@@ -3,7 +3,7 @@
 - [ ] Create item*( double?)*s in before loop to be reused in tests
 - [ ] Test for updateQuality() on normal item
   - [ ] Quality degrades by 1 before sell in date
-  - [ ] Sell in date decrements by 1
+  - [x] Sell in date decrements by 1
   - [ ] Quality degrades by 2 after sell in date
   - [ ] Quality does not go below 0
 - [ ] Test for updateQuality() on aged brie
