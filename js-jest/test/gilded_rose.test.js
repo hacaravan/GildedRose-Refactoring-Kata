@@ -1,16 +1,22 @@
 const {Shop, Item} = require("../src/gilded_rose");
 
 describe("Gilded Rose", function() {
-  let gildedRose, normalItem;
+  let gildedRose, normalItem, updatedItems, updatedNormalItem;
   beforeEach(() => {
     normalItem = new Item("normal item", 10, 20)
     gildedRose = new Shop([normalItem])
+    updatedItems = gildedRose.updateQuality();
+    updatedNormalItem = updatedItems[0]
   })
   describe("updateQuality()", () => {
     it("returns items you've added to a shop", function() {
-      const items = gildedRose.updateQuality();
-      expect(items[0].name).toBe("normal item");
+      expect(updatedNormalItem.name).toBe("normal item");
     });
+    describe("for a normal item", () => {
+      it("decrements the sell in date by 1", () => {
+        expect(updatedNormalItem.sellIn).toBe(9)
+      })
+    })
   })
 
 });
