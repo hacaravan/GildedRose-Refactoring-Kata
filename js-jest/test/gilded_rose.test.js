@@ -55,7 +55,21 @@ describe("Gilded Rose", function() {
       })
     })
 
-    // describe("for aged brie before its sell by date" )
+    describe("for aged brie", () => {
+      describe("before the sell in date", () => {
+        let brie, updatedBrie;
+        beforeEach( () => {
+          brie = new Item("Aged Brie", 10, 10)
+          updatedBrie = updateItem(brie)
+        })
+        it("increases quality by 1", () => {
+          expect(updatedBrie.quality).toBe(11)
+        })
+        it("decreases sell in date by 1", () => {
+          expect(updatedBrie.sellIn).toBe(9)
+        })
+      })
+    })
   })
 
 });
