@@ -98,12 +98,28 @@ describe("Gilded Rose", function() {
     })
 
     describe("for sulfuras", () => {
-      let updatedSulfuras = createAndUpdateItem("Sulfuras, Hand of Ragnaros", 10, 80)
-      it("does not change the sell in date", () => {
-        expect(updatedSulfuras.sellIn).toBe(10)
+      let updatedSulfuras
+      describe("with positive sell in date", () => {
+        beforeEach( () => {
+          updatedSulfuras = createAndUpdateItem("Sulfuras, Hand of Ragnaros", 10, 80)
+        })
+        it("does not change the sell in date", () => {
+          expect(updatedSulfuras.sellIn).toBe(10)
+        })
+        it("does not change the quality", () => {
+          expect(updatedSulfuras.quality).toBe(80)
+        })
       })
-      it("does not change the quality", () => {
-        expect(updatedSulfuras.quality).toBe(80)
+      describe("with negative sell in date", () => {
+        beforeEach( () => {
+          updatedSulfuras = createAndUpdateItem("Sulfuras, Hand of Ragnaros", -1, 80)
+        })
+        it("does not change the sell in date", () => {
+          expect(updatedSulfuras.sellIn).toBe(-1)
+        })
+        it("does not change the quality", () => {
+          expect(updatedSulfuras.quality).toBe(80)
+        })
       })
     })
 
