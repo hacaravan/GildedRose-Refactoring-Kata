@@ -6,14 +6,14 @@
   - [x] Sell in date decrements by 1
   - [x] Quality degrades by 2 after sell in date
   - [x] Quality does not go below 0
-- [ ] Test for updateQuality() on aged brie
+- [x] Test for updateQuality() on aged brie
   - [x] Quality increases by 1 before sell in date
   - [x] Sell in date decrements by 1
-  - [ ] Quality increases by 2 after sell in date
-  - [ ] Quality does not go above 50
-- [ ] Test for updateQuality() on sulfuras
-  - [ ] Quality does not change
-  - [ ] Sell in date does not change
+  - [x] Quality increases by 2 after sell in date
+  - [x] Quality does not go above 50
+- [x] Test for updateQuality() on sulfuras
+  - [x] Quality does not change
+  - [x] Sell in date does not change
 - [ ] Test for updateQuality() on backstage passes
   - [ ] Quality increases by 1 up to 11 days before sell in date
   - [ ] Quality increases by 2 between 10 and 6 days before sell in date

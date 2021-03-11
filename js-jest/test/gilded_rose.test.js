@@ -1,6 +1,5 @@
 "use strict"
 
-const {Shop, Item} = require("../src/gilded_rose");
 const {createAndUpdateItem} = require("./spec_helper.js")
 
 describe("Gilded Rose", function() {
@@ -88,6 +87,16 @@ describe("Gilded Rose", function() {
             expect(updatedPremiumOldBrie.quality).toBe(50)
           })
         })
+      })
+    })
+
+    describe("for sulfuras", () => {
+      let updatedSulfuras = createAndUpdateItem("Sulfuras, Hand of Ragnaros", 10, 80)
+      it("does not change the sell in date", () => {
+        expect(updatedSulfuras.sellIn).toBe(10)
+      })
+      it("does not change the quality", () => {
+        expect(updatedSulfuras.quality).toBe(80)
       })
     })
   })
