@@ -7,8 +7,8 @@
   - [x] Quality degrades by 2 after sell in date
   - [x] Quality does not go below 0
 - [ ] Test for updateQuality() on aged brie
-  - [ ] Quality increases by 1 before sell in date
-  - [ ] Sell in date decrements by 1
+  - [x] Quality increases by 1 before sell in date
+  - [x] Sell in date decrements by 1
   - [ ] Quality increases by 2 after sell in date
   - [ ] Quality does not go above 50
 - [ ] Test for updateQuality() on sulfuras
