@@ -10,40 +10,52 @@ describe("Gilded Rose", function() {
       let updatedItem = updateItem(item)
       expect(updatedItem.name).toBe("item");
     });
-    describe("for a normal item before the sell by date", () => {
-      let normalItem, updatedNormalItem;
-      beforeEach(() => {
-        normalItem = new Item("normal item", 10, 20)
-        updatedNormalItem = updateItem(normalItem)
+    describe("for a normal item", () => {
+      describe("before the sell by date", () => {
+        let normalItem, updatedNormalItem;
+        beforeEach(() => {
+          normalItem = new Item("normal item", 10, 20)
+          updatedNormalItem = updateItem(normalItem)
+        })
+        it("decrements the sell in date by 1", () => {
+          expect(updatedNormalItem.sellIn).toBe(9)
+        })
+        it("decrements the quality by 1", () => {
+          expect(updatedNormalItem.quality).toBe(19)
+        })
       })
-      it("decrements the sell in date by 1", () => {
-        expect(updatedNormalItem.sellIn).toBe(9)
+      describe("after the sell in date", () => {
+        let normalOutdatedItem, updatedNormalOutdatedItem;
+        beforeEach(() => {
+          normalOutdatedItem = new Item("normal item", -1, 20)
+          updatedNormalOutdatedItem = updateItem(normalOutdatedItem)
+        })
+        it("decrements quality by 2", () => {
+          expect(updatedNormalOutdatedItem.quality).toBe(18)
+        })
+        it("decrements sell in date by 1", () => {
+          expect(updatedNormalOutdatedItem.sellIn).toBe(-2)
+        })
       })
-      it("decrements the quality by 1", () => {
-        expect(updatedNormalItem.quality).toBe(19)
+      describe("with low quality", () => {
+        describe("before the sell by date", () => {
+          it("does not reduce quality below 0", () => {
+            let lowQualityItem = new Item("low quality item", 10, 0)
+            let updatedLowQualityItem = updateItem(lowQualityItem)
+            expect(updatedLowQualityItem.quality).toBe(0)
+          })
+        })
+        describe("after the sell by date", () => {
+          it("does not reduce quality below 0", () => {
+            let lowQualityItem = new Item("low quality item", -1, 0)
+            let updatedLowQualityItem = updateItem(lowQualityItem)
+            expect(updatedLowQualityItem.quality).toBe(0)
+          })
+        })
       })
     })
-    describe("for a low quality item before the sell by date", () => {
-      it("does not reduce quality below 0", () => {
-        let lowQualityItem = new Item("low quality item", 10, 0)
-        let updatedLowQualityItem = updateItem(lowQualityItem)
-        expect(updatedLowQualityItem.quality).toBe(0)
-      })
-    })
-    describe("for a normal item after the sell in date", () => {
-      it("decrements quality by 2", () => {
-        let normalOutdatedItem = new Item("outdated", -1, 20)
-        let updatedNormalOutdatedItem = updateItem(normalOutdatedItem)
-        expect(updatedNormalOutdatedItem.quality).toBe(18)
-      })
-    })
-    describe("for a low quality item after the sell by date", () => {
-      it("does not reduce quality below 0", () => {
-        let lowQualityItem = new Item("low quality item", -1, 0)
-        let updatedLowQualityItem = updateItem(lowQualityItem)
-        expect(updatedLowQualityItem.quality).toBe(0)
-      })
-    })
+
+    // describe("for aged brie before its sell by date" )
   })
 
 });
