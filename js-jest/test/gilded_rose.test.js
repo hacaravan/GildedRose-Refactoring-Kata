@@ -99,6 +99,69 @@ describe("Gilded Rose", function() {
         expect(updatedSulfuras.quality).toBe(80)
       })
     })
+
+    describe("for backstage passes", () => {
+      describe("more than 10 days before the concert", () => {
+        let updatedBackstagePass;
+        beforeEach( () => {
+          updatedBackstagePass = createAndUpdateItem('Backstage passes to a TAFKAL80ETC concert', 11, 20)
+        })
+        it("decreases sell in date by 1", () => {
+          expect(updatedBackstagePass.sellIn).toBe(10)
+        })
+        it("increases quality by 1", () => {
+          expect(updatedBackstagePass.quality).toBe(21)
+        })
+        it("doesn't increase quality above 50", () => {
+          updatedBackstagePass = createAndUpdateItem('Backstage passes to a TAFKAL80ETC concert', 11, 50)
+          expect(updatedBackstagePass.quality).toBe(50)
+        })
+      })
+      describe("between 10 and 6 days before the concert", () => {
+        let updatedBackstagePass;
+        beforeEach( () => {
+          updatedBackstagePass = createAndUpdateItem('Backstage passes to a TAFKAL80ETC concert', 6, 20)
+        })
+        it("decreases sell in date by 1", () => {
+          expect(updatedBackstagePass.sellIn).toBe(5)
+        })
+        it("increases quality by 2", () => {
+          expect(updatedBackstagePass.quality).toBe(22)
+        })
+        it("doesn't increase quality above 50", () => {
+          updatedBackstagePass = createAndUpdateItem('Backstage passes to a TAFKAL80ETC concert', 6, 50)
+          expect(updatedBackstagePass.quality).toBe(50)
+        })
+      })
+      describe("between 5 and 1 days before the concert", () => {
+        let updatedBackstagePass;
+        beforeEach( () => {
+          updatedBackstagePass = createAndUpdateItem('Backstage passes to a TAFKAL80ETC concert', 1, 20)
+        })
+        it("decreases sell in date by 1", () => {
+          expect(updatedBackstagePass.sellIn).toBe(0)
+        })
+        it("increases quality by 2", () => {
+          expect(updatedBackstagePass.quality).toBe(23)
+        })
+        it("doesn't increase quality above 50", () => {
+          updatedBackstagePass = createAndUpdateItem('Backstage passes to a TAFKAL80ETC concert', 1, 50)
+          expect(updatedBackstagePass.quality).toBe(50)
+        })
+      })
+      describe("on the day of the concert", () => {
+        let updatedBackstagePass;
+        beforeEach( () => {
+          updatedBackstagePass = createAndUpdateItem('Backstage passes to a TAFKAL80ETC concert', 0, 20)
+        })
+        it("decreases sell in date by 1", () => {
+          expect(updatedBackstagePass.sellIn).toBe(-1)
+        })
+        it("reduces quality to 0", () => {
+          expect(updatedBackstagePass.quality).toBe(0)
+        })
+      })
+    })
   })
 
 });

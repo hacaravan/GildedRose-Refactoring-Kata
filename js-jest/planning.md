@@ -17,7 +17,7 @@
 - [ ] Test for updateQuality() on backstage passes
   - [ ] Quality increases by 1 up to 11 days before sell in date
   - [ ] Quality increases by 2 between 10 and 6 days before sell in date
-  - [ ] Quality increases by 3 between 5 and 0 days before sell in date
+  - [ ] Quality increases by 3 between 5 and 1 days before sell in date
   - [ ] Sell in date decrements by 1
   - [ ] Quality is after sell in date (i.e. sellIn < 0)
   - [ ] Quality does not go above 50
