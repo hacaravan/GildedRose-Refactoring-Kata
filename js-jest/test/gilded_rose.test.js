@@ -82,6 +82,22 @@ describe("Gilded Rose", function() {
           expect(updatedOldBrie.sellIn).toBe(-2)
         })
       })
+      describe("with high quality", () => {
+        describe("before the sell in date", () => {
+          it("does not increase quality above 50", () => {
+            let premiumBrie = new Item("Aged Brie", 10, 50)
+            let updatedPremiumBrie = updateItem(premiumBrie)
+            expect(updatedPremiumBrie.quality).toBe(50)
+          })
+        })
+        describe("after the sell in date", () => {
+          it("does not increase quality above 50", () => {
+            let premiumOldBrie = new Item("Aged Brie", -1, 50)
+            let updatedPremiumOldBrie = updateItem(premiumOldBrie)
+            expect(updatedPremiumOldBrie.quality).toBe(50)
+          })
+        })
+      })
     })
   })
 
