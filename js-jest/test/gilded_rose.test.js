@@ -37,6 +37,13 @@ describe("Gilded Rose", function() {
         expect(updatedNormalOutdatedItem.quality).toBe(18)
       })
     })
+    describe("for a low quality item after the sell by date", () => {
+      it("does not reduce quality below 0", () => {
+        let lowQualityItem = new Item("low quality item", -1, 0)
+        let updatedLowQualityItem = updateItem(lowQualityItem)
+        expect(updatedLowQualityItem.quality).toBe(0)
+      })
+    })
   })
 
 });
