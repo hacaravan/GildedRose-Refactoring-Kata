@@ -161,6 +161,18 @@ describe("Gilded Rose", function() {
           expect(updatedBackstagePass.quality).toBe(0)
         })
       })
+      describe("after the day of the concert", () => {
+        let updatedBackstagePass;
+        beforeEach( () => {
+          updatedBackstagePass = createAndUpdateItem('Backstage passes to a TAFKAL80ETC concert', -1, 0)
+        })
+        it("decreases sell in date by 1", () => {
+          expect(updatedBackstagePass.sellIn).toBe(-2)
+        })
+        it("keeps quality at 0", () => {
+          expect(updatedBackstagePass.quality).toBe(0)
+        })
+      })
     })
   })
 
