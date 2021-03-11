@@ -139,6 +139,10 @@ describe("Gilded Rose", function() {
           updatedBackstagePass = createAndUpdateItem('Backstage passes to a TAFKAL80ETC concert', 6, 50)
           expect(updatedBackstagePass.quality).toBe(50)
         })
+        it("doesn't increase quality above 50 from 49", () => {
+          updatedBackstagePass = createAndUpdateItem('Backstage passes to a TAFKAL80ETC concert', 6, 49)
+          expect(updatedBackstagePass.quality).toBe(50)
+        })
       })
       describe("between 5 and 1 days before the concert", () => {
         let updatedBackstagePass;
@@ -153,6 +157,10 @@ describe("Gilded Rose", function() {
         })
         it("doesn't increase quality above 50", () => {
           updatedBackstagePass = createAndUpdateItem('Backstage passes to a TAFKAL80ETC concert', 1, 50)
+          expect(updatedBackstagePass.quality).toBe(50)
+        })
+        it("doesn't increase quality above 50 from 48", () => {
+          updatedBackstagePass = createAndUpdateItem('Backstage passes to a TAFKAL80ETC concert', 1, 48)
           expect(updatedBackstagePass.quality).toBe(50)
         })
       })
